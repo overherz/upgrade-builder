@@ -1,0 +1,16 @@
+{
+    "name": "overherz-cscart/upgrade-builder",
+    "description": "Command-line tools for CS-Cart & Multivendor developers",
+    "autoload": {
+        "psr-4": {
+            "Tygh\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexander Bolshakov",
+            "email": "abolshakov@cs-cart.com"
+        }
+    ]
+}
