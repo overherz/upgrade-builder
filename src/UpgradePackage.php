@@ -47,6 +47,7 @@ class UpgradePackage implements UpgradePackageInterface
             $src = $data['src'];
             unset($data['src']);
 
+            $path = preg_replace('/^.*?\//ui', '', $path);            
             $this->schema['files'][$path] = $data;
 
             if ($data['status'] == 'deleted') {
