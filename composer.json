@@ -2,6 +2,11 @@
     "name": "overherz/cscartupgradebuilder",
     "description": "Command-line tools for CS-Cart & Multivendor developers",
     "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "upgrade\\builder": "src/"
+        }
+    },
     "authors": [
         {
             "name": "Alexander Bolshakov",
