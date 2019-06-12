@@ -1,5 +1,5 @@
 {
-    "name": "overherz-cscart/upgrade-builder",
+    "name": "overherz/cscartupgradebuilder",
     "description": "Command-line tools for CS-Cart & Multivendor developers",
     "autoload": {
         "psr-4": {
