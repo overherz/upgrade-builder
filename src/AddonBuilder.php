@@ -16,7 +16,7 @@ class AddonBuilder extends Builder
      */
     public function getAddonUpgradePath()
     {
-        return $this->getUnpackedArchiveToPath() . '/app/addons/' . $this->product_name . '/upgrades/' . $this->version_to;
+        return $this->getUnpackedArchiveToPath() . '/' . $this->product_name . '/app/addons/' . $this->product_name . '/upgrades/' . $this->version_to;
     }
 
     /**
