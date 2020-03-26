@@ -647,26 +647,24 @@ class Builder
      * Return array of migrations
      * @return array
      */
-    public function getMigrations()
+    public function getMigrations(array $files)
     {
-        $result = array();
-
-        if (!empty($this->migrations_path) && is_dir($this->migrations_path)) {
-            $migrations = scandir($this->migrations_path);
-
-            foreach ($migrations as $value) {
-                if ($value == '.' || $value == '..' || !preg_match('/[0-9]{5,}.*\.php/i', $value)) {
-                    continue;
-                }
-
-                if ($this->isExcludedMigration($value)) {
-                    continue;
-                }
-
-                $result[] = $this->migrations_path . '/' . $value;
+        $result = $resultRaw = [];
+        foreach ($files as $file) {
+            preg_match('/upgrades\/(.*)\/migrations\/.*\.php/ui', $file['src'], $match);
+            if (!empty($match)) {
+                $resultRaw[$match[1]][] = $file['src'];
             }
+
         }
 
+        ksort($resultRaw);
+
+        foreach ($resultRaw as $item) {
+            sort($item);
+            $result = array_merge($result, $item);
+        }
+        
         return $result;
     }
 
