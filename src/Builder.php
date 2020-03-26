@@ -311,13 +311,14 @@ class Builder
     protected function initPackage()
     {
         $this->message('Get files');
-        $this->package->setFiles($this->getFiles());
+        $files = $this->getFiles();
+        $this->package->setFiles($files);
 
         $this->message('Get validators');
         $this->package->setValidators($this->getValidators());
 
         $this->message('Get migrations');
-        $this->package->setMigrations($this->getMigrations());
+        $this->package->setMigrations($this->getMigrations($files));
 
         $this->message('Get extra files');
         $this->package->setExtraFiles($this->getExtraFiles());
