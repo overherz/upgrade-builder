@@ -652,7 +652,7 @@ class Builder
         $result = $resultRaw = [];
         foreach ($files as $file) {
             preg_match('/upgrades\/(.*)\/migrations\/.*\.php/ui', $file['src'], $match);
-            if (!empty($match)) {
+            if (!empty($match) && version_compare($match[1], $this->version_from, '>')) {
                 $resultRaw[$match[1]][] = $file['src'];
             }
 
