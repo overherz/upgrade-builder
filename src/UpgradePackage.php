@@ -166,12 +166,35 @@ class UpgradePackage implements UpgradePackageInterface
             file_put_contents($pre_script, $script);
         }
 
+        $this->deleteUnnecessaryFiles($this->work_directory_path);
         file_put_contents("{$this->work_directory_path}/package.json", json_encode($this->schema, JSON_PRETTY_PRINT));
 
         $this->exec("cd {$this->work_directory_path}/; zip -r {$file} ./* 2>/dev/null");
 
         return $file;
     }
+
+    private function deleteUnnecessaryFiles($dir) {
+        if (!is_dir($dir)) {
+            return null;
+        }
+
+        $files = scandir($dir);
+        foreach ($files as $file) {
+            if ($file == "." || $file == "..") {
+                continue;
+            }
+
+            $filePath = $dir . DIRECTORY_SEPARATOR . $file;
+            if (is_dir($filePath)) {
+                $this->deleteUnnecessaryFiles($filePath);
+            } elseif (is_file($filePath)) {
+                if (preg_match('~^\._~ui', basename($filePath))) {
+                    unlink($filePath);
+                }
+            }
+        }
+    } 
 
     /**
      * @inheritDoc
