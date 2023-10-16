@@ -1,6 +1,6 @@
 {
-    "name": "overherz/cscartupgradebuilder",
-    "description": "Command-line tools for CS-Cart & Multivendor developers",
+    "name": "overherz/upgrade-builder",
+    "description": "Command-line tools for CS-Cart & Multi-vendor developers",
     "license": "MIT",
     "autoload": {
         "psr-4": {
