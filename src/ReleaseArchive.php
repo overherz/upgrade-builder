@@ -85,7 +85,32 @@ class ReleaseArchive implements ReleaseArchiveInterface
      */
     public function extractTo($path)
     {
-        return $this->archiver->extract($this->file, $path);
+        $result = $this->archiver->extract($this->file, $path);
+        $this->deleteUnnecessaryFiles($path);
+
+        return $result;
+    }
+
+    private function deleteUnnecessaryFiles($dir) {
+        if (!is_dir($dir)) {
+            return null;
+        }
+
+        $files = scandir($dir);
+        foreach ($files as $file) {
+            if ($file == "." || $file == "..") {
+                continue;
+            }
+
+            $filePath = $dir . DIRECTORY_SEPARATOR . $file;
+            if (is_dir($filePath)) {
+                $this->deleteUnnecessaryFiles($filePath);
+            } elseif (is_file($filePath)) {
+                if (preg_match('~^\._~ui', basename($filePath))) {
+                    unlink($filePath);
+                }
+            }
+        }
     }
 
     public function getArchiver()
